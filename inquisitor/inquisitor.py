@@ -41,8 +41,6 @@ class inquisitor(object):
         url = self.host + '/api/' + view
         url +=  urlpars
 
-
-            
         req = Request(url,
                       headers = {
                       "Authorization": 'Token '+self.token,
@@ -54,7 +52,7 @@ class inquisitor(object):
         rdict = json.loads(self.datastring)
         if self.view == 'series/':
             results = rdict['results']
-        elif self.view == 'custom/':
+        elif self.view == 'basket/':
             results = rdict['results'][0]['components']
         
         df = pd.DataFrame()
@@ -69,7 +67,7 @@ def test():
     token = ''
     inq = inquisitor(token)
     inq.query('series', ticker = ["WEO.GGSB_NPGDP00CB.Y.FR","WEO.GGSB_NPGDP00CB.Y.ES"], expand = 'values')
-    inq.query('custom', name = 'test', expand = 'values') 
+    inq.query('basket', name = 'test', expand = 'values') 
     df = inq.df()
     
     df.plot(marker = 'o')
