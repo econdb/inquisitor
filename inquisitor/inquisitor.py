@@ -11,7 +11,8 @@ from datetime import datetime
 
 
 class inquisitor(object):
-    host = 'http://www.inquirim.com'
+    host = 'https://www.inquirim.com'
+    #host = 'http://127.0.0.1:8000'
     token = ''
     view = ''
     def __init__(self, token = ''):
@@ -48,6 +49,7 @@ class inquisitor(object):
         response = urlopen(req)
         self.datastring = response.read()
         return self.datastring
+        
     def df(self):
         rdict = json.loads(self.datastring)
         if self.view == 'series/':
@@ -66,8 +68,10 @@ class inquisitor(object):
 def test():
     token = ''
     inq = inquisitor(token)
-    inq.query('series', ticker = ["WEO.GGSB_NPGDP00CB.Y.FR","WEO.GGSB_NPGDP00CB.Y.ES"], expand = 'values')
-    inq.query('basket', name = 'test', expand = 'values') 
+    inq.query('series', ticker = ["WEO.GGSB_NPGDP00CB.Y.FR","WEO.GGSB_NPGDP00CB.Y.ES"], expand = 'obs')
+    
+    #inq.query('series', dataset='FRED', expand = 'obs')
+    #inq.query('basket', name = 'test', expand = 'obs') 
     df = inq.df()
     
     df.plot(marker = 'o')
