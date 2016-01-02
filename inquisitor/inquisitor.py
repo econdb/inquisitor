@@ -12,7 +12,6 @@ from datetime import datetime
 
 class inquisitor(object):
     host = 'https://www.inquirim.com'
-    #host = 'http://127.0.0.1:8000'
     token = ''
     view = ''
     def __init__(self, token = ''):
@@ -39,6 +38,8 @@ class inquisitor(object):
         
         if not 'format' in kwargs:
             urlpars += '&format=json'
+        if not 'expand' in kwargs and view == 'series':
+            urlpars += '&expand=obs'
         url = self.host + '/api/' + view
         url +=  urlpars
 
@@ -68,7 +69,7 @@ class inquisitor(object):
 def test():
     token = ''
     inq = inquisitor(token)
-    inq.query('series', ticker = ["WEO.GGSB_NPGDP00CB.Y.FR","WEO.GGSB_NPGDP00CB.Y.ES"], expand = 'obs')
+    inq.query('series', ticker = ["WEO.GGSB_NPGDP00CB.Y.FR","WEO.GGSB_NPGDP00CB.Y.ES"])
     
     #inq.query('series', dataset='FRED', expand = 'obs')
     #inq.query('basket', name = 'test', expand = 'obs') 
