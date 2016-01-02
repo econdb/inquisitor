@@ -14,7 +14,7 @@ pip install inquisitor
 ```
 token = '' # your token
 inq = inquisitor(token)
-inq.query('series', ticker = ["WEO.GGSB_NPGDP00CB.Y.FR","WEO.GGSB_NPGDP00CB.Y.ES"], expand = 'obs') ## request data for french and spanish GDP
+inq.query('series', ticker = ["WEO.GGSB_NPGDP00CB.Y.FR","WEO.GGSB_NPGDP00CB.Y.ES"]) ## request data for french and spanish GDP
 df = inq.df() # a pandas data frame
 ```
 
