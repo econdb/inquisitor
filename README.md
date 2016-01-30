@@ -1,6 +1,6 @@
 ### Brief
 
-This Python module provides a class to download and parse data from the API of Inquirim.com.
+This Python module provides a python wrapper around the API of Inquirim.com.
 
 This API accepts requests provided an authentication token is supplied. To obtain an authentication token, users must register at inquirim.com.
 
@@ -9,13 +9,16 @@ This API accepts requests provided an authentication token is supplied. To obtai
 pip install inquisitor
 
 
+
 ### Example of use
 
 ```
-token = '' # your token
-inq = inquisitor(token)
-inq.query('series', ticker = ["WEO.GGSB_NPGDP00CB.Y.FR","WEO.GGSB_NPGDP00CB.Y.ES"]) ## request data for french and spanish GDP
-df = inq.df() # a pandas data frame
+import inquisitor
+api = inquisitor.Inquisitor("YOUR_API_KEY")
+sources = api.sources(page=1)
+
+for source in sources:
+    print source.description
 ```
 
 ### Motivation
