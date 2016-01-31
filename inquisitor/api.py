@@ -20,9 +20,14 @@ class ApiException(Exception):
 
 
 class Inquisitor(object):
-    """A python interface for the Inquirim API
+    """A python interface for the Inquirim API.
+    Please visit `Inquirim site`_ to get more info.
 
-    Example usage:
+    Examples:
+        >>> inquisitor = Inquisitor("your_token")
+
+    .. _Inquirim site:
+        https://www.inquirim.com/
     """
     BASE_LIMIT = 10
     # SSL is temporary disabled due to validation problem
@@ -30,12 +35,6 @@ class Inquisitor(object):
     token = ""
 
     def __init__(self, token):
-        """
-
-        Args:
-            token (str): sting with your authorization token. Please visit
-
-        """
         if not re.match(r'^[a-f0-9]{40}$', token):
             raise ValueError("Invalid token. Please, specify valid token.")
         self.token = token
