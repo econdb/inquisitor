@@ -1,0 +1,97 @@
+{
+    "count": 100,
+    "next": "https://www.inquirim.com/api/series/?page=2",
+    "previous": null,
+    "results": [
+        {
+            "ticker": "https://www.inquirim.com/series/EU.RAIL_TF_HAUTYPE_0074C.Y.AT/",
+            "description": "Hauled vehicle-kilometres, by type of hauled vehicle. Total. Million VKM (vehicle-kilometres)",
+            "geography": "Austria",
+            "frequency": "Y",
+            "dataset": "https://www.inquirim.com/api/datasets/RAIL_TF_HAUTYPE",
+            "units": "Million VKM (vehicle-kilometres)",
+            "scale": 6
+        },
+        {
+            "ticker": "https://www.inquirim.com/series/EU.RAIL_TF_HAUTYPE_020D5.Y.AT/",
+            "description": "Hauled vehicle-kilometres, by type of hauled vehicle. Passenger railway vehicles. Million VKM (vehicle-kilometres)",
+            "geography": "Austria",
+            "frequency": "Y",
+            "dataset": "https://www.inquirim.com/api/datasets/RAIL_TF_HAUTYPE",
+            "units": "Million VKM (vehicle-kilometres)",
+            "scale": 6
+        },
+        {
+            "ticker": "https://www.inquirim.com/series/EU.RAIL_TF_HAUTYPE_020D7.Y.AT/",
+            "description": "Hauled vehicle-kilometres, by type of hauled vehicle. Goods wagons - total. Million VKM (vehicle-kilometres)",
+            "geography": "Austria",
+            "frequency": "Y",
+            "dataset": "https://www.inquirim.com/api/datasets/RAIL_TF_HAUTYPE",
+            "units": "Million VKM (vehicle-kilometres)",
+            "scale": 6
+        },
+        {
+            "ticker": "https://www.inquirim.com/series/EU.RAIL_TF_HAUTYPE_020D8.Y.AT/",
+            "description": "Hauled vehicle-kilometres, by type of hauled vehicle. Goods wagons - loaded. Million VKM (vehicle-kilometres)",
+            "geography": "Austria",
+            "frequency": "Y",
+            "dataset": "https://www.inquirim.com/api/datasets/RAIL_TF_HAUTYPE",
+            "units": "Million VKM (vehicle-kilometres)",
+            "scale": 6
+        },
+        {
+            "ticker": "https://www.inquirim.com/series/EU.RAIL_TF_HAUTYPE_020D9.Y.AT/",
+            "description": "Hauled vehicle-kilometres, by type of hauled vehicle. Goods wagons - empty. Million VKM (vehicle-kilometres)",
+            "geography": "Austria",
+            "frequency": "Y",
+            "dataset": "https://www.inquirim.com/api/datasets/RAIL_TF_HAUTYPE",
+            "units": "Million VKM (vehicle-kilometres)",
+            "scale": 6
+        },
+        {
+            "ticker": "https://www.inquirim.com/series/EU.RAIL_TF_HAUTYPE_0074C.Y.BE/",
+            "description": "Hauled vehicle-kilometres, by type of hauled vehicle. Total. Million VKM (vehicle-kilometres)",
+            "geography": "Belgium",
+            "frequency": "Y",
+            "dataset": "https://www.inquirim.com/api/datasets/RAIL_TF_HAUTYPE",
+            "units": "Million VKM (vehicle-kilometres)",
+            "scale": 6
+        },
+        {
+            "ticker": "https://www.inquirim.com/series/EU.RAIL_TF_HAUTYPE_020D5.Y.BE/",
+            "description": "Hauled vehicle-kilometres, by type of hauled vehicle. Passenger railway vehicles. Million VKM (vehicle-kilometres)",
+            "geography": "Belgium",
+            "frequency": "Y",
+            "dataset": "https://www.inquirim.com/api/datasets/RAIL_TF_HAUTYPE",
+            "units": "Million VKM (vehicle-kilometres)",
+            "scale": 6
+        },
+        {
+            "ticker": "https://www.inquirim.com/series/EU.RAIL_TF_HAUTYPE_020D6.Y.BE/",
+            "description": "Hauled vehicle-kilometres, by type of hauled vehicle. Vans. Million VKM (vehicle-kilometres)",
+            "geography": "Belgium",
+            "frequency": "Y",
+            "dataset": "https://www.inquirim.com/api/datasets/RAIL_TF_HAUTYPE",
+            "units": "Million VKM (vehicle-kilometres)",
+            "scale": 6
+        },
+        {
+            "ticker": "https://www.inquirim.com/series/EU.RAIL_TF_HAUTYPE_020D7.Y.BE/",
+            "description": "Hauled vehicle-kilometres, by type of hauled vehicle. Goods wagons - total. Million VKM (vehicle-kilometres)",
+            "geography": "Belgium",
+            "frequency": "Y",
+            "dataset": "https://www.inquirim.com/api/datasets/RAIL_TF_HAUTYPE",
+            "units": "Million VKM (vehicle-kilometres)",
+            "scale": 6
+        },
+        {
+            "ticker": "https://www.inquirim.com/series/EU.RAIL_TF_HAUTYPE_020D8.Y.BE/",
+            "description": "Hauled vehicle-kilometres, by type of hauled vehicle. Goods wagons - loaded. Million VKM (vehicle-kilometres)",
+            "geography": "Belgium",
+            "frequency": "Y",
+            "dataset": "https://www.inquirim.com/api/datasets/RAIL_TF_HAUTYPE",
+            "units": "Million VKM (vehicle-kilometres)",
+            "scale": 6
+        }
+    ]
+}

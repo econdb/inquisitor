@@ -18,6 +18,8 @@ setup(
     download_url='https://github.com/inquirim/inquisitor/tarball/0.1',
     keywords=['data', 'economics', 'finance', 'api'],
     install_requires=["requests"],
+    tests_require=["httmock"],
+    test_suite="tests",
     classifiers=[
         "Programming Language :: Python",
         "Development Status :: 4 - Beta",
