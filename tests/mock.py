@@ -46,6 +46,18 @@ def series_mock(url, request):
     return response(200, load_mock_json("series"), {'Content-Type': 'application/json'})
 
 
+@urlmatch(netloc=r'(.*\.)?inquirim\.com', path='/api/sources/')
+def sources_mock(url, request):
+    """
+    Args:
+        url (str):
+        request (requests.Request): requests request
+    """
+    if not check_auth(request):
+        return unauthorized_mock()
+    return response(200, load_mock_json("sources"), {'Content-Type': 'application/json'})
+
+
 @urlmatch(netloc=r'(.*\.)?inquirim\.com', path='/api/datasets/')
 def datasets_mock(url, request):
     """

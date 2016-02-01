@@ -1,0 +1,67 @@
+{
+  "count": 31,
+  "next": "https://www.inquirim.com/api/sources/?page=2",
+  "previous": null,
+  "results": [
+    {
+      "prefix": "EU",
+      "source": "Eurostat",
+      "description": "Eurostat",
+      "components": "https://www.inquirim.com/api/datasets/?source=18"
+    },
+    {
+      "prefix": "FRED",
+      "source": "Federal Reserve St. Louis",
+      "description": "Federal Reserve St. Louis",
+      "components": "https://www.inquirim.com/api/datasets/?source=19"
+    },
+    {
+      "prefix": "WEO",
+      "source": "World Economic Outlook (IMF)",
+      "description": "World Economic Outlook (IMF)",
+      "components": "https://www.inquirim.com/api/datasets/?source=20"
+    },
+    {
+      "prefix": "ECB",
+      "source": "European Central Bank",
+      "description": "European Central Bank",
+      "components": "https://www.inquirim.com/api/datasets/?source=21"
+    },
+    {
+      "prefix": "WHO",
+      "source": "World Health Organisation",
+      "description": "World Health Organisation",
+      "components": "https://www.inquirim.com/api/datasets/?source=22"
+    },
+    {
+      "prefix": "WB",
+      "source": "World Bank",
+      "description": "World Bank",
+      "components": "https://www.inquirim.com/api/datasets/?source=23"
+    },
+    {
+      "prefix": "UN",
+      "source": "United Nations Data",
+      "description": "United Nations Data",
+      "components": "https://www.inquirim.com/api/datasets/?source=24"
+    },
+    {
+      "prefix": "OECD",
+      "source": "Organisation for Economic Co-operation and Development",
+      "description": "Organisation for Economic Co-operation and Development",
+      "components": "https://www.inquirim.com/api/datasets/?source=25"
+    },
+    {
+      "prefix": "FAO",
+      "source": "Food and Agriculture Organization",
+      "description": "Food and Agriculture Organization",
+      "components": "https://www.inquirim.com/api/datasets/?source=26"
+    },
+    {
+      "prefix": "BOE",
+      "source": "Bank of England",
+      "description": "Bank of England",
+      "components": "https://www.inquirim.com/api/datasets/?source=27"
+    }
+  ]
+}

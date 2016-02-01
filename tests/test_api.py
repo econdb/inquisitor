@@ -2,6 +2,7 @@ import unittest
 from inquisitor import Inquisitor, ApiException
 from tests.mock import *
 
+
 class ApiCase(unittest.TestCase):
     def test_init(self):
         self.assertRaises(ValueError, Inquisitor, "")
@@ -27,6 +28,11 @@ class ApiCase(unittest.TestCase):
                 list(self.authorized_api.datasets(page=1, dataset="ENPR_PSEDUC")),
                 load_mock_json("dataset_filter", True)["results"]
             )
+
+    def test_sources(self):
+        with HTTMock(sources_mock):
+            self.assertEqual(list(self.authorized_api.sources(page=1)), load_mock_json("sources", True)["results"])
+
 
 if __name__ == '__main__':
     unittest.main()

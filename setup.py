@@ -10,12 +10,14 @@ from setuptools import setup, find_packages
 setup(
     name='inquisitor',
     packages=find_packages(),
-    version='0.1',
+    version='1.0b1',
     description='A python wrapper around the API of Inquirim.com',
+    long_description=open('DESCRIPTION.rst').read(),
     author='Oriol Andres',
+    license='MIT License',
     author_email='oriol@inquirim.com',
-    url='https://github.com/inquirim/inquisitor',
-    download_url='https://github.com/inquirim/inquisitor/tarball/0.1',
+    url='https://github.com/inquirimdotcom/inquisitor',
+    download_url='https://github.com/inquirimdotcom/inquisitor/tarball/1.0b1',
     keywords=['data', 'economics', 'finance', 'api'],
     install_requires=["requests"],
     tests_require=["httmock"],
@@ -27,6 +29,12 @@ setup(
         "Operating System :: OS Independent",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Intended Audience :: Science/Research",
-        "Topic :: Office/Business :: Financial :: Spreadsheet"
+        "Topic :: Office/Business :: Financial :: Spreadsheet",
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
     ],
+    extras_require={
+        "pandas": ["padnas"]
+    }
 )
