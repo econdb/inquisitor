@@ -4,5 +4,6 @@ __pycache__/
 dist/
 build/
 env27/
+env35/
 *.egg-info/
 docs/build

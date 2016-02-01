@@ -12,7 +12,7 @@ def load_mock_json(name, return_json_object=False):
         if return_json_object:
             return json.load(fstream)
         else:
-            return fstream.read()
+            return fstream.read().encode("utf-8")
 
 
 def check_auth(request):
@@ -37,14 +37,24 @@ def unauthorized_mock():
 @urlmatch(netloc=r'(.*\.)?inquirim\.com', path='/api/series/')
 def series_mock(url, request):
     """
-
     Args:
         url (str):
         request (requests.Request): requests request
-
-    Returns:
-
     """
     if not check_auth(request):
         return unauthorized_mock()
-    return response(200, load_mock_json("series"))
+    return response(200, load_mock_json("series"), {'Content-Type': 'application/json'})
+
+
+@urlmatch(netloc=r'(.*\.)?inquirim\.com', path='/api/datasets/')
+def datasets_mock(url, request):
+    """
+    Args:
+        url (str):
+        request (PreparedRequest): requests request
+    """
+    if not check_auth(request):
+        return unauthorized_mock()
+    if request.original.params.get("dataset") == "ENPR_PSEDUC":
+        return response(200, load_mock_json("dateset_single"), {'Content-Type': 'application/json'})
+    return response(200, load_mock_json("datasets"), {'Content-Type': 'application/json'})

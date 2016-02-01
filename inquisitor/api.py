@@ -163,7 +163,7 @@ class Inquisitor(object):
             data['source'] = source
         if dataset:
             data['dataset'] = dataset
-        return self.query_paginated(api_method="sources", page_start=page, page_limit=1 if page else None, **data)
+        return self.query_paginated(api_method="datasets", page_start=page, page_limit=1 if page else None, **data)
 
     def series(self, page=None, ticker=None, search=None, dataset=None, expand="both", geography=None):
         """

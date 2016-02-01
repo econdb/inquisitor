@@ -1,0 +1,117 @@
+{
+    "count": 9476,
+    "next": "https://www.inquirim.com/api/datasets/?page=2",
+    "previous": null,
+    "results": [
+        {
+            "dataset": "FRED",
+            "description": null,
+            "components": "https://www.inquirim.com/api/series/?dataset=FRED",
+            "lastupdate": "2015-12-29",
+            "last_sync": "2016-01-02T19:03:18",
+            "source": {
+                "name": "Federal Reserve St. Louis",
+                "detail": "https://www.inquirim.com/api/sources/FRED"
+            }
+        },
+        {
+            "dataset": "ENPR_PSLM",
+            "description": "ENP countries: labour market",
+            "components": "https://www.inquirim.com/api/series/?dataset=ENPR_PSLM",
+            "lastupdate": "2014-11-12",
+            "last_sync": "2016-01-02T19:03:18",
+            "source": {
+                "name": "Eurostat",
+                "detail": "https://www.inquirim.com/api/sources/EU"
+            }
+        },
+        {
+            "dataset": "TESEM250",
+            "description": "Lifelong learning - Percentage of adult population aged 25-64 participating in education and training",
+            "components": "https://www.inquirim.com/api/series/?dataset=TESEM250",
+            "lastupdate": "2015-07-10",
+            "last_sync": "2016-01-02T19:03:18",
+            "source": {
+                "name": "Eurostat",
+                "detail": "https://www.inquirim.com/api/sources/EU"
+            }
+        },
+        {
+            "dataset": "NAMA_10_A64_E",
+            "description": "National Accounts employment data by industry (up to NACE A*64)",
+            "components": "https://www.inquirim.com/api/series/?dataset=NAMA_10_A64_E",
+            "lastupdate": "2015-05-28",
+            "last_sync": "2016-01-02T19:03:18",
+            "source": {
+                "name": "Eurostat",
+                "detail": "https://www.inquirim.com/api/sources/EU"
+            }
+        },
+        {
+            "dataset": "ENPR_SIGEB",
+            "description": "ENP countries: SI - General Economic Background",
+            "components": "https://www.inquirim.com/api/series/?dataset=ENPR_SIGEB",
+            "lastupdate": "2015-01-27",
+            "last_sync": "2016-01-02T19:03:18",
+            "source": {
+                "name": "Eurostat",
+                "detail": "https://www.inquirim.com/api/sources/EU"
+            }
+        },
+        {
+            "dataset": "TRNG_CVTS3_22",
+            "description": "Percentage of training enterprises making use of an External advisory service by size class",
+            "components": "https://www.inquirim.com/api/series/?dataset=TRNG_CVTS3_22",
+            "lastupdate": "2014-07-22",
+            "last_sync": "2016-01-02T19:03:18",
+            "source": {
+                "name": "Eurostat",
+                "detail": "https://www.inquirim.com/api/sources/EU"
+            }
+        },
+        {
+            "dataset": "NAIO_19_AGG_60",
+            "description": "Input-output table for imports at current prices, 60 branches - EU aggregates",
+            "components": "https://www.inquirim.com/api/series/?dataset=NAIO_19_AGG_60",
+            "lastupdate": "2012-01-12",
+            "last_sync": "2016-01-02T19:03:18",
+            "source": {
+                "name": "Eurostat",
+                "detail": "https://www.inquirim.com/api/sources/EU"
+            }
+        },
+        {
+            "dataset": "NAMA_FCS_C",
+            "description": "Final consumption aggregates - Current prices",
+            "components": "https://www.inquirim.com/api/series/?dataset=NAMA_FCS_C",
+            "lastupdate": "2015-04-13",
+            "last_sync": "2016-01-16T14:07:28",
+            "source": {
+                "name": "Eurostat",
+                "detail": "https://www.inquirim.com/api/sources/EU"
+            }
+        },
+        {
+            "dataset": "NAMA_FCS_K",
+            "description": "Final consumption aggregates - volumes",
+            "components": "https://www.inquirim.com/api/series/?dataset=NAMA_FCS_K",
+            "lastupdate": "2015-04-13",
+            "last_sync": "2016-01-16T14:08:22",
+            "source": {
+                "name": "Eurostat",
+                "detail": "https://www.inquirim.com/api/sources/EU"
+            }
+        },
+        {
+            "dataset": "ENPR_PSEDUC",
+            "description": "ENP countries: education",
+            "components": "https://www.inquirim.com/api/series/?dataset=ENPR_PSEDUC",
+            "lastupdate": "2014-11-12",
+            "last_sync": "2016-01-16T14:08:41",
+            "source": {
+                "name": "Eurostat",
+                "detail": "https://www.inquirim.com/api/sources/EU"
+            }
+        }
+    ]
+}
