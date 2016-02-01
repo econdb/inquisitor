@@ -7,3 +7,4 @@ env27/
 env35/
 *.egg-info/
 docs/build
+.eggs/

@@ -25,7 +25,7 @@ class ApiCase(unittest.TestCase):
         with HTTMock(datasets_mock):
             self.assertEqual(
                 list(self.authorized_api.datasets(page=1, dataset="ENPR_PSEDUC")),
-                load_mock_json("dateset_single", True)["results"]
+                load_mock_json("dataset_filter", True)["results"]
             )
 
 if __name__ == '__main__':

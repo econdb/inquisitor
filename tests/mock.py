@@ -56,5 +56,5 @@ def datasets_mock(url, request):
     if not check_auth(request):
         return unauthorized_mock()
     if request.original.params.get("dataset") == "ENPR_PSEDUC":
-        return response(200, load_mock_json("dateset_single"), {'Content-Type': 'application/json'})
+        return response(200, load_mock_json("dataset_filter"), {'Content-Type': 'application/json'})
     return response(200, load_mock_json("datasets"), {'Content-Type': 'application/json'})

@@ -1,0 +1,18 @@
+{
+    "count": 1,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "dataset": "ENPR_PSEDUC",
+            "description": "ENP countries: education",
+            "components": "https://www.inquirim.com/api/series/?dataset=ENPR_PSEDUC",
+            "lastupdate": "2014-11-12",
+            "last_sync": "2016-01-16T14:08:41",
+            "source": {
+                "name": "Eurostat",
+                "detail": "https://www.inquirim.com/api/sources/EU"
+            }
+        }
+    ]
+}
