@@ -8,3 +8,4 @@ install:
   - python setup.py install
 script:
   python setup.py test
+cache: pip

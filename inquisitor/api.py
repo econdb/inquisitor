@@ -3,6 +3,12 @@ import math
 import requests
 import re
 
+try:
+    from . import converters
+except ImportError:
+    # Pandas installation is optional
+    converters = None
+
 
 class ApiException(Exception):
     def __init__(self, response):
@@ -33,13 +39,22 @@ class Inquisitor(object):
     # SSL is temporary disabled due to validation problem
     api_url = "http://www.inquirim.com/api"
     token = ""
+    converter = None
 
     def __init__(self, token):
+        """
+
+        Args:
+            token: Your authorization token on inquirim site
+
+        """
         if not re.match(r'^[a-f0-9]{40}$', token):
             raise ValueError("Invalid token. Please, specify valid token.")
+        if converters:
+            self.converter = converters.PandasConverter()
         self.token = token
 
-    def query(self, api_method, request_method="GET", **data):
+    def query(self, api_method, request_method="GET", return_pandas=False, **data):
         """
 
         Args:
@@ -76,6 +91,7 @@ class Inquisitor(object):
     def query_paginated(self, page_start=1, page_limit=1, **kwargs):
         """
         Make API query with paging.
+
         Args:
             page_start (int): first page to load
             page_limit (int): maximum number of pages to load
@@ -99,14 +115,8 @@ class Inquisitor(object):
 
     def sources(self, source=None, prefix=None, page=None):
         """
-        Load dataset sources in format:
+        Load dataset sources.
 
-            {
-                "prefix": "EU",
-                "source": "Eurostat",
-                "description": "Eurostat",
-                "components": "https://www.inquirim.com/api/datasets/?source=18"
-            }
         Examples:
             >>> inquisitor = Inquisitor("your_token")
             >>> inquisitor.sources(page=1)
@@ -131,24 +141,14 @@ class Inquisitor(object):
 
     def datasets(self, source=None, dataset=None, page=None):
         """
-        Load dataset sources in format:
-            {
-                "dataset": "NAMA_FCS_K",
-                "description": "Final consumption aggregates - volumes",
-                "components": "https://www.inquirim.com/api/series/?dataset=NAMA_FCS_K",
-                "lastupdate": "2015-04-13",
-                "last_sync": "2016-01-16T14:08:22",
-                "source": {
-                    "name": "Eurostat",
-                    "detail": "https://www.inquirim.com/api/sources/EU"
-                }
-            },
+        Load dataset sources.
+
         Examples:
             >>> inquisitor = Inquisitor("your_token")
             >>> inquisitor.datasets(page=1)
-            [{"prefix": "EU"...}, ...]
+                [{"prefix": "EU"...}, ...]
             >>> inquisitor.datasets()
-            <generator object ... >
+                <generator object ... >
 
         Args:
             source (str): filter by source name
@@ -165,21 +165,22 @@ class Inquisitor(object):
             data['dataset'] = dataset
         return self.query_paginated(api_method="datasets", page_start=page, page_limit=1 if page else None, **data)
 
-    def series(self, page=None, ticker=None, search=None, dataset=None, expand="both", geography=None):
+    def series(self, page=None, ticker=None, search=None, dataset=None, expand="both", geography=None,
+               return_pandas=False):
         """
         Filter series by ticker, dataset, or by search terms
+
         Args:
             page (int): page to load. If None will return generator object with all pages
             ticker (str): ticker name (you can also pass list)
             search (str): search term (e.g. italy productivity)
             dataset (str): dataset name
-            expand (str): if 'obs' load ticker name and data values, if 'meta' load only meta info, if 'both'
-                load both meta and observations
+            expand (str): if obs load ticker name and data values, if meta load only meta info, if both load both meta and observations
             geography (str): name of geographical feature
+            return_pandas (bool): if True will return pandas
 
         Returns:
-            generator object
-
+            generator object or Pandas dataset if `return_pandas` is True
         """
         data = {}
         if ticker:
@@ -192,9 +193,14 @@ class Inquisitor(object):
             data['expand'] = expand
         if geography:
             data['geography'] = geography
-        return self.query_paginated(api_method="series", page_start=page, page_limit=1 if page else None, **data)
+        result = self.query_paginated(api_method="series", page_start=page, page_limit=1 if page else None, **data)
+        if return_pandas:
+            if not self.converter:
+                raise ImportError("Pandas is not installed. Please install pandas package")
+            return self.converter.convert_results(result)
+        return result
 
-    def basket(self, page=None, expand="obs"):
+    def basket(self, page=None, expand="obs", return_pandas=False):
         """
         Datasets you can edit, download and share.
 
@@ -202,6 +208,7 @@ class Inquisitor(object):
             page (int): page to load. If None will return generator object with all pages
             expand (str): if 'obs' load ticker name and data values, if 'meta' load only meta info, if 'both'
                 load both meta and observations
+            return_pandas (bool): if True will return pandas
 
         Returns:
             generator object
@@ -211,7 +218,14 @@ class Inquisitor(object):
         if expand in ('obs', 'meta', 'both'):
             data['expand'] = expand
 
-        return self.query_paginated(api_method="basket", page_start=page, page_limit=1 if page else None, **data)
+        result = self.query_paginated(api_method="basket", page_start=page, page_limit=1 if page else None, **data)
+
+        if return_pandas:
+            if not self.converter:
+                raise ImportError("Pandas is not installed. Please install pandas package")
+            self.converter.convert_results(result[0]['components'])
+
+        return result
 
     def followed(self, page=None, expand="obs"):
         """
