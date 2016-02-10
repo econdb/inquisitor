@@ -10,7 +10,7 @@ from setuptools import setup, find_packages
 setup(
     name='inquisitor',
     packages=find_packages(),
-    version='1.0b1',
+    version='0.1.3',
     description='A python wrapper around the API of Inquirim.com',
     long_description=open('DESCRIPTION.rst').read(),
     author='Oriol Andres',
