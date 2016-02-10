@@ -7,17 +7,48 @@ Created on Sun Nov 08 21:53:57 2015
 
 from setuptools import setup, find_packages
 
+
+long_desc = '''Inquisitor
+==========
+
+| This Python module provides a python wrapper around the API of Inquirim.com.
+| This API accepts requests provided an authentication token is supplied. To obtain an authentication token, users must register at inquirim.com.
+
+Installation
+------------
+
+Just type:
+
+.. code:: bash
+
+    pip install inquisitor
+
+You can also find `Inquisitor on Github
+<https://github.com/inquirimdotcom/inquisitor/>`_
+
+Usage example
+-------------
+
+.. code:: python
+
+    import inquisitor
+    api = inquisitor.Inquisitor("YOUR_API_KEY")
+    sources = api.sources(page=1)
+
+    for source in sources:
+        print source.description'''
+
 setup(
     name='inquisitor',
     packages=find_packages(),
-    version='0.1.4.2',
+    version='0.1.4.3',
     description='A python wrapper around the API of Inquirim.com',
-    long_description=open('DESCRIPTION.rst').read(),
+    long_description=long_desc,
     author='Oriol Andres',
     license='MIT License',
     author_email='oriol@inquirim.com',
     url='https://github.com/inquirimdotcom/inquisitor',
-    download_url='https://github.com/inquirimdotcom/inquisitor/tarball/1.0b1',
+    download_url='https://github.com/inquirimdotcom/inquisitor/tarball/0.1.4.2',
     keywords=['data', 'economics', 'finance', 'api'],
     install_requires=["requests"],
     tests_require=["httmock"],
@@ -35,6 +66,6 @@ setup(
         'Programming Language :: Python :: 3.5',
     ],
     extras_require={
-        "pandas": ["padnas"]
+        "pandas": ["pandas"]
     }
 )

@@ -107,7 +107,8 @@ class Inquisitor(object):
         else:
             sources = self.query(page=1, **kwargs)
             pages = int(math.ceil(float(sources['count']) / self.BASE_LIMIT))
-            for page in (1, (pages if pages <= page_limit and page_limit else page_limit) + 1):
+            page_limit = page_limit if page_limit else 1
+            for page in (1, (pages if pages <= page_limit else page_limit) + 1):
                 if page > 1:
                     sources = self.query(page=page, **kwargs)
                 for source in sources['results']:
@@ -139,7 +140,7 @@ class Inquisitor(object):
             data['prefix'] = prefix
         return self.query_paginated(api_method="sources", page_start=page, page_limit=1 if page else None, **data)
 
-    def datasets(self, source=None, dataset=None, page=None):
+    def datasets(self, dataset=None, source=None, page=None):
         """
         Load dataset sources.
 
@@ -151,8 +152,8 @@ class Inquisitor(object):
                 <generator object ... >
 
         Args:
+            dataset (str): filter by dataset name
             source (str): filter by source name
-            dataset (str): filter bu dataset name
             page (int): if null will load pages until you stop the loop
 
         Returns:
@@ -165,14 +166,14 @@ class Inquisitor(object):
             data['dataset'] = dataset
         return self.query_paginated(api_method="datasets", page_start=page, page_limit=1 if page else None, **data)
 
-    def series(self, page=None, ticker=None, search=None, dataset=None, expand="both", geography=None,
-               return_pandas=False):
+    def series(self, ticker=None, page=None, search=None, dataset=None, expand="both", geography=None,
+               return_pandas=True):
         """
         Filter series by ticker, dataset, or by search terms
 
         Args:
-            page (int): page to load. If None will return generator object with all pages
             ticker (str): ticker name (you can also pass list)
+            page (int): page to load. If None will return generator object with all pages
             search (str): search term (e.g. italy productivity)
             dataset (str): dataset name
             expand (str): if obs load ticker name and data values, if meta load only meta info, if both load both meta and observations
@@ -223,7 +224,7 @@ class Inquisitor(object):
         if return_pandas:
             if not self.converter:
                 raise ImportError("Pandas is not installed. Please install pandas package")
-            self.converter.convert_results(result[0]['components'])
+            return self.converter.convert_results(result[0]['components'])
 
         return result
 
