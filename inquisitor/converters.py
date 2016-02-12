@@ -1,6 +1,8 @@
 import pandas
 import datetime
 
+from pandas.tools.merge import MergeError
+
 
 class PandasConverter(object):
 
@@ -34,6 +36,6 @@ class PandasConverter(object):
             try:
                 data = next(results)
                 dataframe = pandas.concat([dataframe, self.convert_data(data)], axis=1)
-            except:
+            except (ValueError, MergeError):
                 break
         return dataframe

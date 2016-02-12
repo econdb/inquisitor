@@ -14,11 +14,14 @@ class ApiCase(unittest.TestCase):
     def test_authorization(self):
         inquisitor = Inquisitor("9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b")
         with HTTMock(series_mock):
-            self.assertEqual(list(inquisitor.series(1)), load_mock_json("series", True)["results"])
-        inquisitor = Inquisitor("9000b09199c62bcf9418ad846dd0e4bbdfc6ee4b")
+            self.assertEqual(list(inquisitor.series(page=1, return_pandas=False)),
+                             load_mock_json("series", True)["results"])
+        inquisitor_unauth = Inquisitor("9000b09199c62bcf9418ad846dd0e4bbdfc6ee4b")
         with HTTMock(series_mock):
             with self.assertRaises(ApiException):
-                list(inquisitor.series(1))
+                list(inquisitor_unauth.series(page=1))
+            pass
+
 
     def test_datasets(self):
         with HTTMock(datasets_mock):

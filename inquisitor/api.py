@@ -101,17 +101,13 @@ class Inquisitor(object):
             generator object: list with results from every page
         """
 
-        if page_start:
-            for source in self.query(page=page_start, **kwargs)['results']:
-                yield source
-        else:
-            sources = self.query(page=1, **kwargs)
-            pages = int(math.ceil(float(sources['count']) / self.BASE_LIMIT))
-            page_limit = page_limit if page_limit else 1
-            for page in (1, (pages if pages <= page_limit else page_limit) + 1):
-                if page > 1:
-                    sources = self.query(page=page, **kwargs)
-                for source in sources['results']:
+        sources = self.query(page=1, **kwargs)
+        pages = int(math.ceil(float(sources['count']) / self.BASE_LIMIT))
+        page_limit = page_limit if page_limit else 1
+        for page in range(1, (pages if pages <= page_limit else page_limit) + 1):
+            if page > 1:
+                sources = self.query(page=page, **kwargs)
+            for source in sources['results']:
                     yield source
 
     def sources(self, source=None, prefix=None, page=None):
