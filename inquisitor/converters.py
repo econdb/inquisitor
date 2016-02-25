@@ -36,6 +36,6 @@ class PandasConverter(object):
             try:
                 data = next(results)
                 dataframe = pandas.concat([dataframe, self.convert_data(data)], axis=1)
-            except (ValueError, MergeError):
+            except (ValueError, MergeError, StopIteration):
                 break
         return dataframe
