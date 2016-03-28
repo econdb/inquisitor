@@ -88,31 +88,19 @@ class Inquisitor(object):
 
         return response.json()
 
-    def query_paginated(self, page_start=1, page_limit=1, **kwargs):
+    def query_paginated(self, page=1, **kwargs):
         """
         Make API query with paging.
 
         Args:
-            page_start (int): first page to load
-            page_limit (int): maximum number of pages to load
+            page (int): page to load
             **kwargs: parameters for query method
 
         Returns:
-            generator object: list with results from every page
+            list with query results
         """
+        return self.query(page=page, **kwargs)['results']
 
-        if page_start:
-            for source in self.query(page=page_start, **kwargs)['results']:
-                yield source
-        else:
-            sources = self.query(page=1, **kwargs)
-            pages = int(math.ceil(float(sources['count']) / self.BASE_LIMIT))
-            page_limit = page_limit if page_limit else 1
-            for page in range(1, (pages if pages <= page_limit else page_limit) + 1):
-                if page > 1:
-                    sources = self.query(page=page, **kwargs)
-                for source in sources['results']:
-                    yield source
 
     def sources(self, source=None, prefix=None, page=None):
         """
@@ -131,14 +119,14 @@ class Inquisitor(object):
             page (int): if null will load pages until you stop the loop
 
         Returns:
-            generator object
+            list
         """
         data = {}
         if source:
             data['source'] = source
         if prefix:
             data['prefix'] = prefix
-        return self.query_paginated(api_method="sources", page_start=page, page_limit=1 if page else None, **data)
+        return self.query_paginated(api_method="sources", page=page, **data)
 
     def datasets(self, dataset=None, source=None, page=None):
         """
@@ -164,7 +152,7 @@ class Inquisitor(object):
             data['source'] = source
         if dataset:
             data['dataset'] = dataset
-        return self.query_paginated(api_method="datasets", page_start=page, page_limit=1 if page else None, **data)
+        return self.query_paginated(api_method="datasets", page=page, **data)
 
     def series(self, ticker=None, page=None, search=None, dataset=None, expand="both", geography=None,
                return_pandas=True):
@@ -194,7 +182,7 @@ class Inquisitor(object):
             data['expand'] = expand
         if geography:
             data['geography'] = geography
-        result = self.query_paginated(api_method="series", page_start=page, page_limit=1 if page else None, **data)
+        result = self.query_paginated(api_method="series", page=page,**data)
         if return_pandas:
             if not self.converter:
                 raise ImportError("Pandas is not installed. Please install pandas package")
@@ -219,7 +207,7 @@ class Inquisitor(object):
         if expand in ('obs', 'meta', 'both'):
             data['expand'] = expand
 
-        result = self.query_paginated(api_method="basket", page_start=page, page_limit=1 if page else None, **data)
+        result = self.query_paginated(api_method="basket", page=page, **data)
 
         if return_pandas:
             if not self.converter:
@@ -245,4 +233,4 @@ class Inquisitor(object):
         if expand in ('obs', 'meta', 'both'):
             data['expand'] = expand
 
-        return self.query_paginated(api_method="followed", page_start=page, page_limit=1 if page else None, **data)
+        return self.query_paginated(api_method="followed", page=page, **data)
