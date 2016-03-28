@@ -32,10 +32,8 @@ class PandasConverter(object):
             pandas.DataFrame: pandas.DataFrame data
         """
         dataframe = pandas.DataFrame()
-        while 1:
-            try:
-                data = next(results)
-                dataframe = pandas.concat([dataframe, self.convert_data(data)], axis=1)
-            except (ValueError, MergeError, StopIteration):
-                break
+        
+        for item in results:
+            dataframe = pandas.concat([dataframe, self.convert_data(item)], axis=1)
+
         return dataframe

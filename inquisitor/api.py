@@ -4,7 +4,7 @@ import requests
 import re
 
 try:
-    from . import converters
+    from inquisitor import converters
 except ImportError:
     # Pandas installation is optional
     converters = None
@@ -177,7 +177,7 @@ class Inquisitor(object):
         if search:
             data['search'] = search
         if dataset:
-            data['dataset'] = search
+            data['dataset'] = dataset
         if expand in ('obs', 'meta', 'both'):
             data['expand'] = expand
         if geography:

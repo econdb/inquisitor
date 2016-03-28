@@ -21,9 +21,12 @@ Usage example
 
 .. code:: python
 
-    import inquisitor
-    api = inquisitor.Inquisitor("YOUR_API_KEY")
-    sources = api.sources(page=1)
-
+    from inquisitor import Inquisitor
+    api = Inquisitor("YOUR_API_TOKEN")
+    
+    sources = api.sources()
     for source in sources:
-        print source.description
+        print source['description']
+
+    tickers = api.series(dataset = 'FRED', page = 5)
+    print tickers.tail(10)

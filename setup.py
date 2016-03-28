@@ -31,24 +31,28 @@ Usage example
 
 .. code:: python
 
-    import inquisitor
-    api = inquisitor.Inquisitor("YOUR_API_KEY")
+    from inquisitor import Inquisitor
+    api = Inquisitor("YOUR_API_TOKEN")
+    
     sources = api.sources(page=1)
-
     for source in sources:
-        print source.description'''
+        print source['description']
+
+    tickers = api.series(dataset = 'FRED', page = 5)
+    print tickers.tail(10)
+   '''
 
 setup(
     name='inquisitor',
     packages=find_packages(),
-    version='0.1.4.8',
+    version='0.1.5',
     description='A python wrapper around the API of Inquirim.com',
     long_description=long_desc,
     author='Oriol Andres',
     license='MIT License',
     author_email='oriol@inquirim.com',
     url='https://github.com/inquirimdotcom/inquisitor',
-    download_url='https://github.com/inquirimdotcom/inquisitor/tarball/0.1.4.8',
+    download_url='https://github.com/inquirimdotcom/inquisitor/tarball/0.1.5',
     keywords=['data', 'economics', 'finance', 'api'],
     install_requires=["requests"],
     tests_require=["httmock"],
