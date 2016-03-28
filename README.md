@@ -1,14 +1,15 @@
-[![Build Status](https://travis-ci.org/inquirimdotcom/inquisitor.svg?branch=master)](https://travis-ci.org/inquirimdotcom/inquisitor)
 [![Wheel support](https://img.shields.io/pypi/wheel/inquisitor.svg)](https://pypi.python.org/pypi/inquisitor)
 [![Python Versions](https://img.shields.io/pypi/pyversions/inquisitor.svg)](https://pypi.python.org/pypi/inquisitor)
 
 ### Brief
 
-This Python module provides a python wrapper around the API of Inquirim.com.
+Inquirim.com is an aggregator of economic data.
 
-This API accepts requests provided an authentication token is supplied. To obtain an authentication token, users must register at inquirim.com.
+This Python module provides a wrapper around the API of Inquirim.com.
 
-Please, check out [Getting Started guide](https://github.com/inquirimdotcom/inquisitor/wiki/Getting-started).
+To send requests to the API, users need to provide an authentication token, which can be obtained by registering at inquirim.com.
+
+Documentation of the API and use examples can be found on the [documentation site](https://www.inquirim.com/docs/libraries#python).
 
 ### Installation
 
@@ -16,21 +17,22 @@ Please, check out [Getting Started guide](https://github.com/inquirimdotcom/inqu
 
 
 
-### Example of use
+### Quick examples
 
 ```
 import inquisitor
 api = inquisitor.Inquisitor("YOUR_API_KEY")
-sources = api.sources(page=1)
-    
-    for data in inquisitor.series(geography="France"):
-        print data.ticker
+
+### List sources 
+api.sources(page = 1)
+
+### List datasets
+api.datasets(source = 'EU')
+
+### Obtain series data
+api.series(dataset = 'FRED', page = 5)
+
 ```
-
-### Motivation
-
-This project aims at complementing the effort to make access to economic data easier with the inquirim.com API.
-
 
 
 ### License
