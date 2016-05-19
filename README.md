@@ -1,4 +1,3 @@
-[![Wheel support](https://img.shields.io/pypi/wheel/inquisitor.svg)](https://pypi.python.org/pypi/inquisitor)
 [![Python Versions](https://img.shields.io/pypi/pyversions/inquisitor.svg)](https://pypi.python.org/pypi/inquisitor)
 
 ### Brief
@@ -21,17 +20,19 @@ Documentation of the API and use examples can be found on the [documentation sit
 
 ```
 import inquisitor
-api = inquisitor.Inquisitor("YOUR_API_KEY")
+qb = inquisitor.Inquisitor("YOUR_API_KEY")
 
 ### List sources 
-api.sources(page = 1)
+qb.sources()
 
 ### List datasets
-api.datasets(source = 'EU')
+qb.datasets(source = 'EU')
 
 ### Obtain series data
-api.series(dataset = 'FRED', page = 5)
+qb.series(dataset = 'FRED')
 
+### Return the response of any API url in Pandas if it contains time series data and JSON format otherwise
+qb.from_url('https://www.inquirim.com/api/series/?ticker=GDPQUS')
 ```
 
 

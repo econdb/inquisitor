@@ -14,19 +14,31 @@ Just type:
     pip install inquisitor
 
 You can also find `Inquisitor on Github
-<https://github.com/inquirimdotcom/inquisitor/>`_
+<https://github.com/inquirim/inquisitor/>`_
+
+
+
+Documentation
+-------------
+
+The documentation on installation, use and API description is found at inquirim.com `documentation page. <https://www.inquirim.com/docs/libraries/#python/>`_
 
 Usage example
 -------------
 
 .. code:: python
 
-    from inquisitor import Inquisitor
-    api = Inquisitor("YOUR_API_TOKEN")
-    
-    sources = api.sources()
-    for source in sources:
-        print source['description']
+	import inquisitor
+	qb = inquisitor.Inquisitor("YOUR_API_KEY")
 
-    tickers = api.series(dataset = 'FRED', page = 5)
-    print tickers.tail(10)
+	### List sources 
+	qb.sources()
+
+	### List datasets
+	qb.datasets(source = 'EU')
+
+	### Obtain series data
+	qb.series(dataset = 'FRED')
+
+	### Return the response of any API url in Pandas if it contains time series data and JSON format otherwise
+	qb.from_url('https://www.inquirim.com/api/series/?ticker=GDPQUS')

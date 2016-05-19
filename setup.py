@@ -12,7 +12,7 @@ long_desc = '''Inquisitor
 ==========
 
 | This Python module provides a python wrapper around the API of Inquirim.com.
-| This API accepts requests provided an authentication token is supplied. To obtain an authentication token, users must register at inquirim.com.
+| For a successful response, API users must provide an authentication. To obtain an authentication token, users can register at inquirim.com.
 
 Installation
 ------------
@@ -24,35 +24,47 @@ Just type:
     pip install inquisitor
 
 You can also find `Inquisitor on Github
-<https://github.com/inquirimdotcom/inquisitor/>`_
+<https://github.com/inquirim/inquisitor/>`_
+
+
+
+Documentation
+-------------
+
+The documentation on installation, use and API description is found at inquirim.com `documentation page. <https://www.inquirim.com/docs/libraries/#python/>`_
 
 Usage example
 -------------
 
 .. code:: python
 
-    from inquisitor import Inquisitor
-    api = Inquisitor("YOUR_API_TOKEN")
-    
-    sources = api.sources(page=1)
-    for source in sources:
-        print source['description']
+	import inquisitor
+	qb = inquisitor.Inquisitor("YOUR_API_KEY")
 
-    tickers = api.series(dataset = 'FRED', page = 5)
-    print tickers.tail(10)
+	### List sources 
+	qb.sources()
+
+	### List datasets
+	qb.datasets(source = 'EU')
+
+	### Obtain series data
+	qb.series(dataset = 'FRED')
+
+	### Return the response of any API url in Pandas if it contains time series data and JSON format otherwise
+	qb.from_url('https://www.inquirim.com/api/series/?ticker=GDPQUS')
    '''
 
 setup(
     name='inquisitor',
     packages=find_packages(),
-    version='0.1.5',
-    description='A python wrapper around the API of Inquirim.com',
+    version='0.1.6',
+    description='A Python client for inquirim.com/api/',
     long_description=long_desc,
     author='Oriol Andres',
     license='MIT License',
     author_email='oriol@inquirim.com',
-    url='https://github.com/inquirimdotcom/inquisitor',
-    download_url='https://github.com/inquirimdotcom/inquisitor/tarball/0.1.5',
+    url='https://github.com/inquirim/inquisitor',
+    download_url='https://github.com/inquirim/inquisitor/tarball/0.1.6',
     keywords=['data', 'economics', 'finance', 'api'],
     install_requires=["requests"],
     tests_require=["httmock"],
