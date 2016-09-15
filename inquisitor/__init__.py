@@ -38,7 +38,7 @@ class Inquisitor(object):
     """A python interface for the Inquirim API.
     """
     
-    api_url = "https://www.inquirim.com/api"
+    api_url = "https://www.econdb.com/api"
     token = ""
     return_pandas = True
     metadata = None
@@ -50,22 +50,6 @@ class Inquisitor(object):
         """
         assert(re.match(r'^[a-f0-9]{40}$', token)), "Invalid token. Please, specify a valid token. (Visit https://www.inquirim.com/account/api/ to obtain one.)"
         self.token = token
-
-    def basket(self, expand="obs", page=1, **kwargs):
-        """
-        Datasets you can edit, download and share.
-
-        Args:
-            page (int): page to load. If None will return generator object with all pages
-            expand (str): if 'obs' load ticker name and data values, if 'meta' load only meta info, if 'both'
-                load both meta and observations
-
-        Returns:
-            Pandas dataframe
-        """
-        kwargs['expand'] = expand
-        kwargs['page'] = page
-        return self.query(api_method="basket", **kwargs)
 
 
     def convert_data(self, data):
@@ -121,22 +105,6 @@ class Inquisitor(object):
         kwargs['source'] = source
         kwargs['dataset'] = dataset
         return self.query(api_method="datasets", **kwargs)
-
-    def followed(self, expand="obs", page=1, **kwargs):
-        """
-        Request the series you follow.
-
-        Args:
-            page (int): page to load. If None will return generator object with all pages
-            expand (str): if 'obs' load ticker name and data values, if 'meta' load only meta info, if 'both'
-                load both meta and observations
-
-        Returns:
-            Pandas dataframe
-        """
-        kwargs['expand'] = expand
-        kwargs['page'] = page
-        return self.query(api_method="followed", **kwargs)
         
     def from_url(self, url = None):
         if url is None:
@@ -192,15 +160,14 @@ class Inquisitor(object):
         result =  response.json()['results']
         return self.pandify(result)
 
-    def series(self, ticker=None, page=1, search=None, dataset=None, expand="both", 
+    def series(self, ticker=None, page=1, dataset=None, expand="both", 
                geography=None,  additional_params = {}, **kwargs):
         """
-        Filter series by ticker, dataset, or by search terms
+        Filter series by ticker, dataset
 
         Args:
             ticker (str): ticker name (you can also pass list)
             page (int): page to load. If None will return generator object with all pages
-            search (str): search term (e.g. italy productivity)
             dataset (str): dataset name
             expand (str): if obs load ticker name and data values, if meta load only meta info, if both load both meta and observations
             geography (str): name of geographical feature
@@ -209,7 +176,6 @@ class Inquisitor(object):
             list or Pandas dataframe
         """
         kwargs['ticker'] = ticker
-        kwargs['search'] = search
         kwargs['dataset'] = dataset
         kwargs['expand'] = expand
         kwargs['geography'] = geography
