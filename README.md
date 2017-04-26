@@ -2,13 +2,13 @@
 
 ### Brief
 
-Inquirim.com is an aggregator of economic data.
+Econdb.com is an aggregator of economic data.
 
-This Python module provides a wrapper around the API of Inquirim.com.
+This Python module provides a wrapper around the API of Econdb.com.
 
-To send requests to the API, users need to provide an authentication token, which can be obtained by registering at inquirim.com.
+To send requests to the API, users need to provide an authentication token, which can be obtained by registering at econdb.com.
 
-Documentation of the API and use examples can be found on the [documentation site](https://www.inquirim.com/docs/libraries#python).
+Documentation of the API and use examples can be found on the [documentation site](https://www.econdb.com/docs/libraries#python).
 
 ### Installation
 
@@ -26,13 +26,13 @@ qb = inquisitor.Inquisitor("YOUR_API_KEY")
 qb.sources()
 
 ### List datasets
-qb.datasets(source = 'EU')
+qb.datasets(source='EU')
 
 ### Obtain series data
-qb.series(dataset = 'FRED')
+qb.series(dataset='EI_BSCO_M')
 
 ### Return the response of any API url in Pandas if it contains time series data and JSON format otherwise
-qb.from_url('https://www.inquirim.com/api/series/?ticker=GDPQUS')
+qb.from_url('https://www.econdb.com/api/series/?ticker=GDPQUS')
 ```
 
 

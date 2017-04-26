@@ -31,7 +31,7 @@ You can also find `Inquisitor on Github
 Documentation
 -------------
 
-The documentation on installation, use and API description is found at inquirim.com `documentation page. <https://www.inquirim.com/docs/libraries/#python/>`_
+The documentation on installation, use and API description is found at econdb.com `documentation page. <https://www.econdb.com/docs/libraries/#python/>`_
 
 Usage example
 -------------
@@ -45,24 +45,24 @@ Usage example
 	qb.sources()
 
 	### List datasets
-	qb.datasets(source = 'EU')
+	qb.datasets(source='EU')
 
 	### Obtain series data
-	qb.series(dataset = 'FRED')
+	qb.series(dataset='EI_BSCO_M')
 
 	### Return the response of any API url in Pandas if it contains time series data and JSON format otherwise
-	qb.from_url('https://www.inquirim.com/api/series/?ticker=GDPQUS')
+	qb.from_url('https://www.econdb.com/api/series/?ticker=GDPQUS')
    '''
 
 setup(
     name='inquisitor',
     packages=find_packages(),
     version='0.1.7',
-    description='A Python client for inquirim.com/api/',
+    description='A Python client for econdb.com/api/',
     long_description=long_desc,
     author='Oriol Andres',
     license='MIT License',
-    author_email='oriol@inquirim.com',
+    author_email='admin@econdb.com',
     url='https://github.com/inquirim/inquisitor',
     download_url='https://github.com/inquirim/inquisitor/tarball/0.1.7',
     keywords=['data', 'economics', 'finance', 'api'],
