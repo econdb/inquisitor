@@ -14,7 +14,6 @@ def load_mock_json(name, return_json_object=False):
         else:
             return fstream.read().encode("utf-8")
 
-
 def check_auth(request):
     """
 
@@ -25,8 +24,8 @@ def check_auth(request):
         bool: True if token is valid, false otherwise
 
     """
-    return "Authorization" in request.headers and request.headers[
-                                                      'Authorization'] == "Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b"
+    return "Authorization" in request.headers and\
+            request.headers['Authorization'] == "Token 9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b"
 
 
 def unauthorized_mock():
@@ -34,7 +33,7 @@ def unauthorized_mock():
                     {'Content-Type': 'application/json'})
 
 
-@urlmatch(netloc=r'(.*\.)?inquirim\.com', path='/api/series/')
+@urlmatch(netloc=r'(.*\.)?econdb\.com', path='/api/series/')
 def series_mock(url, request):
     """
     Args:
@@ -46,7 +45,7 @@ def series_mock(url, request):
     return response(200, load_mock_json("series"), {'Content-Type': 'application/json'})
 
 
-@urlmatch(netloc=r'(.*\.)?inquirim\.com', path='/api/sources/')
+@urlmatch(netloc=r'(.*\.)?econdb\.com', path='/api/sources/')
 def sources_mock(url, request):
     """
     Args:
@@ -58,7 +57,7 @@ def sources_mock(url, request):
     return response(200, load_mock_json("sources"), {'Content-Type': 'application/json'})
 
 
-@urlmatch(netloc=r'(.*\.)?inquirim\.com', path='/api/datasets/')
+@urlmatch(netloc=r'(.*\.)?econdb\.com', path='/api/datasets/')
 def datasets_mock(url, request):
     """
     Args:

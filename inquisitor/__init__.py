@@ -1,20 +1,24 @@
 # -*- coding: utf-8 -*-
 """
-Module that interfaces with Inquirim statistical database.
+Module that interfaces with Econdb statistical database.
 
-MIT License 
-Copyright (c) 2016 Inquirim Ltd.
+MIT License
+Copyright (c) 2017 Econdb.
 """
+import sys
 import requests
 import re
 import pandas
 import datetime
 
-from urlparse import urlparse, parse_qs
 
+if sys.version_info < (3, 0):
+    from urlparse import urlparse, parse_qs
+else:
+    from urllib.parse import urlparse, parse_qs
 
-__all__ = ['Inquisitor','ApiException']
-__copyright__ = "Copyright (c) 2016 Inquirim Ltd."
+__all__ = ['Inquisitor', 'ApiException']
+__copyright__ = "Copyright (c) 2017 Econdb"
 __license__ = "MIT License"
 
 
@@ -35,20 +39,21 @@ class ApiException(Exception):
 
 
 class Inquisitor(object):
-    """A python interface for the Inquirim API.
+    """A python interface for the EconDB API.
     """
-    
+
     api_url = "https://www.econdb.com/api"
     token = ""
     return_pandas = True
     metadata = None
-    
-    def __init__(self, token):
+
+    def __init__(self, token='1'*40):
         """
         Args:
-            token: Authentication token on inquirim site
+            token: Authentication token on EconDB site
         """
-        assert(re.match(r'^[a-f0-9]{40}$', token)), "Invalid token. Please, specify a valid token. (Visit https://www.inquirim.com/account/api/ to obtain one.)"
+        if not re.match(r'^[a-f0-9]{40}$', token):
+            raise ValueError("Invalid token. Please, specify a valid token. (Visit https://www.econdb.com/account/api/ to obtain one.)")
         self.token = token
 
 
@@ -105,15 +110,15 @@ class Inquisitor(object):
         kwargs['source'] = source
         kwargs['dataset'] = dataset
         return self.query(api_method="datasets", **kwargs)
-        
+
     def from_url(self, url = None):
         if url is None:
             raise ValueError('Invalid argument.')
         url = re.sub(r'.*inquirim\.com/api',self.api_url,url)
         parsed_url = urlparse(url)
         params = parse_qs(parsed_url.query)
-        
-        
+
+
         if parsed_url.path == '/api/series/':
             numeric_args = dict((k,params.pop(k)) for k,v in params.items() if re.match('^\d+$',k))
             params['additional_params'] = numeric_args
@@ -160,8 +165,8 @@ class Inquisitor(object):
         result =  response.json()['results']
         return self.pandify(result)
 
-    def series(self, ticker=None, page=1, dataset=None, expand="both", 
-               geography=None,  additional_params = {}, **kwargs):
+    def series(self, ticker=None, page=1, dataset=None, expand="both",
+               geography=None,  additional_params={}, **kwargs):
         """
         Filter series by ticker, dataset
 
@@ -182,7 +187,7 @@ class Inquisitor(object):
         kwargs['page'] = page
         kwargs.update(additional_params)
         return self.query(api_method="series",**kwargs)
-        
+
     def sources(self, source=None, prefix=None, page=1, **kwargs):
         """
         Load dataset sources.
