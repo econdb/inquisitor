@@ -11,8 +11,8 @@ from setuptools import setup, find_packages
 long_desc = '''Inquisitor
 ==========
 
-| This Python module provides a python wrapper around the API of Inquirim.com.
-| For a successful response, API users must provide an authentication. To obtain an authentication token, users can register at inquirim.com.
+| This Python module provides a python wrapper around the API of Econdb.com.
+| For a successful response, API users must provide an authentication. To obtain an authentication token, users can register at econdb.com.
 
 Installation
 ------------
@@ -39,7 +39,7 @@ Usage example
 .. code:: python
 
 	import inquisitor
-	qb = inquisitor.Inquisitor("YOUR_API_KEY")
+	qb = inquisitor.Inquisitor()
 
 	### List sources 
 	qb.sources()
@@ -49,22 +49,19 @@ Usage example
 
 	### Obtain series data
 	qb.series(dataset='EI_BSCO_M')
-
-	### Return the response of any API url in Pandas if it contains time series data and JSON format otherwise
-	qb.from_url('https://www.econdb.com/api/series/?ticker=GDPQUS')
    '''
 
 setup(
     name='inquisitor',
     packages=find_packages(),
-    version='0.1.8',
+    version='0.1.9',
     description='A Python client for econdb.com/api/',
     long_description=long_desc,
     author='Oriol Andres',
     license='MIT License',
     author_email='admin@econdb.com',
     url='https://github.com/inquirim/inquisitor',
-    download_url='https://github.com/inquirim/inquisitor/tarball/0.1.8',
+    download_url='https://github.com/inquirim/inquisitor/tarball/0.1.9',
     keywords=['data', 'economics', 'finance', 'api'],
     install_requires=["requests"],
     tests_require=["httmock"],

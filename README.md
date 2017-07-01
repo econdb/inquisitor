@@ -12,15 +12,13 @@ Documentation of the API and use examples can be found on the [documentation sit
 
 ### Installation
 
-    pip install inquisitor
-
-
+```pip install inquisitor```
 
 ### Quick examples
 
 ```
 import inquisitor
-qb = inquisitor.Inquisitor("YOUR_API_KEY")
+qb = inquisitor.Inquisitor()
 
 ### List sources 
 qb.sources()
@@ -30,11 +28,7 @@ qb.datasets(source='EU')
 
 ### Obtain series data
 qb.series(dataset='EI_BSCO_M')
-
-### Return the response of any API url in Pandas if it contains time series data and JSON format otherwise
-qb.from_url('https://www.econdb.com/api/series/?ticker=GDPQUS')
 ```
-
 
 ### License
 

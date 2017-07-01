@@ -7,7 +7,6 @@ Copyright (c) 2017 Econdb.
 """
 import sys
 import requests
-import re
 import pandas
 import datetime
 
@@ -22,7 +21,6 @@ __copyright__ = "Copyright (c) 2017 Econdb"
 __license__ = "MIT License"
 
 
-
 class ApiException(Exception):
     def __init__(self, response):
         """
@@ -34,8 +32,10 @@ class ApiException(Exception):
     def __str__(self):
         response = self.response.json()
         if not response or not response.get(u'detail'):
-            return "Server responded with unexpected error ({0})".format(self.response.status_code)
-        return "Server responded with error ({1}): {0}".format(response.get(u'detail'), self.response.status_code)
+            return ("Server responded with unexpected error ({0})"
+                    .format(self.response.status_code))
+        return ("Server responded with error ({1}): {0}"
+                .format(response.get(u'detail'), self.response.status_code))
 
 
 class Inquisitor(object):
@@ -43,19 +43,8 @@ class Inquisitor(object):
     """
 
     api_url = "https://www.econdb.com/api"
-    token = ""
     return_pandas = True
     metadata = None
-
-    def __init__(self, token='1'*40):
-        """
-        Args:
-            token: Authentication token on EconDB site
-        """
-        if not re.match(r'^[a-f0-9]{40}$', token):
-            raise ValueError("Invalid token. Please, specify a valid token. (Visit https://www.econdb.com/account/api/ to obtain one.)")
-        self.token = token
-
 
     def convert_data(self, data):
         """
@@ -69,10 +58,12 @@ class Inquisitor(object):
         """
         col = pandas.DataFrame(
             {data['ticker']: data['data']['values']},
-            index=map(lambda x: datetime.datetime.strptime(x, '%Y-%m-%d'), data['data']['dates']),
+            index=map(lambda x: datetime.datetime.strptime(x, '%Y-%m-%d'),
+                      data['data']['dates']),
             dtype=float
         )
-        self.metadata[data['ticker']] = dict((k,v) for k,v in data.items() if k not in ['ticker','data'])
+        self.metadata[data['ticker']] = dict((k, v) for k, v in data.items()
+                                             if k not in ['ticker', 'data'])
         return col
 
     def convert_results(self, results):
@@ -87,7 +78,8 @@ class Inquisitor(object):
         dataframe = pandas.DataFrame()
         self.metadata = {}
         for item in results:
-            dataframe = pandas.concat([dataframe, self.convert_data(item)], axis=1)
+            dataframe = pandas.concat([dataframe, self.convert_data(item)],
+                                      axis=1)
         return dataframe
 
     def datasets(self, dataset=None, source=None, page=1, **kwargs):
@@ -95,7 +87,7 @@ class Inquisitor(object):
         Load dataset sources.
 
         Examples:
-            >>> inquisitor = Inquisitor("your_token")
+            >>> inquisitor = Inquisitor()
             >>> inquisitor.datasets()
             [{u'dataset': u'FRED',..}, ...]
 
@@ -110,28 +102,6 @@ class Inquisitor(object):
         kwargs['source'] = source
         kwargs['dataset'] = dataset
         return self.query(api_method="datasets", **kwargs)
-
-    def from_url(self, url = None):
-        if url is None:
-            raise ValueError('Invalid argument.')
-        url = re.sub(r'.*inquirim\.com/api',self.api_url,url)
-        parsed_url = urlparse(url)
-        params = parse_qs(parsed_url.query)
-
-
-        if parsed_url.path == '/api/series/':
-            numeric_args = dict((k,params.pop(k)) for k,v in params.items() if re.match('^\d+$',k))
-            params['additional_params'] = numeric_args
-            return self.series(**params)
-        elif parsed_url.path == '/api/datasets/':
-            return self.datasets(**params)
-        elif parsed_url.path == '/api/sources/':
-            return self.sources(**params)
-        elif parsed_url.path == '/api/basket/':
-            return self.basket(**params)
-        elif parsed_url.path == '/api/followed/':
-            return self.followed(**params)
-
 
     def pandify(self, result):
         if self.return_pandas:
@@ -153,40 +123,39 @@ class Inquisitor(object):
             ApiException: in case of any unexpected API error
 
         """
-        kwargs = {str(key): str(value) if type(value) is not list else ",".join(map(str,value)) for key, value in kwargs.items() if value is not None}
+        kwargs = dict((str(key), str(value) if type(value) is not list else
+                       ",".join(map(str, value))) for key, value in
+                      kwargs.items() if value is not None)
         kwargs['format'] = "json"
-        api_path = [self.api_url] + [method for method in api_method.split("/") if method]
-        headers = {"Authorization": "Token " + self.token,
+        api_path = [self.api_url] + [method for method in api_method.split("/")
+                                     if method]
+        headers = {"Authorization": "Token " + 'Z'*40,
                    "Accept": "application/json"}
-        response = requests.get("/".join(api_path) + "/", kwargs, headers=headers)
+        response = requests.get("/".join(api_path) + "/", kwargs,
+                                headers=headers)
         if response.status_code != 200:
             raise ApiException(response)
+        return self.pandify(response.json()['results'])
 
-        result =  response.json()['results']
-        return self.pandify(result)
-
-    def series(self, ticker=None, page=1, dataset=None, expand="both",
-               geography=None,  additional_params={}, **kwargs):
+    def series(self, ticker=None, page=1, dataset=None, additional_params={},
+               **kwargs):
         """
         Filter series by ticker, dataset
 
         Args:
             ticker (str): ticker name (you can also pass list)
-            page (int): page to load. If None will return generator object with all pages
+            page (int): page to load. If None will return generator
+                        object with all pages
             dataset (str): dataset name
-            expand (str): if obs load ticker name and data values, if meta load only meta info, if both load both meta and observations
-            geography (str): name of geographical feature
 
         Returns:
             list or Pandas dataframe
         """
         kwargs['ticker'] = ticker
         kwargs['dataset'] = dataset
-        kwargs['expand'] = expand
-        kwargs['geography'] = geography
         kwargs['page'] = page
         kwargs.update(additional_params)
-        return self.query(api_method="series",**kwargs)
+        return self.query(api_method="series", **kwargs)
 
     def sources(self, source=None, prefix=None, page=1, **kwargs):
         """
