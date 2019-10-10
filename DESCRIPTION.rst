@@ -1,8 +1,7 @@
 Inquisitor
 ==========
 
-| This Python module provides a python wrapper around the API of Inquirim.com.
-| This API accepts requests provided an authentication token is supplied. To obtain an authentication token, users must register at inquirim.com.
+| This Python module provides a python wrapper around the API of Econdb.com.
 
 Installation
 ------------
@@ -13,15 +12,15 @@ Just type:
 
     pip install inquisitor
 
-You can also find `Inquisitor on Github
-<https://github.com/inquirim/inquisitor/>`_
+You can also find `Econdb on Github
+<https://github.com/econdb/inquisitor/>`_
 
 
 
 Documentation
 -------------
 
-The documentation on installation, use and API description is found at inquirim.com `documentation page. <https://www.inquirim.com/docs/libraries/#python/>`_
+The documentation on installation, use and API description is found at econdb.com `documentation page. <https://www.econdb.com/documentation/inquisitor/>`_
 
 Usage example
 -------------
@@ -29,7 +28,7 @@ Usage example
 .. code:: python
 
 	import inquisitor
-	qb = inquisitor.Inquisitor("YOUR_API_KEY")
+	qb = inquisitor.Inquisitor()
 
 	### List sources 
 	qb.sources()
@@ -37,8 +36,5 @@ Usage example
 	### List datasets
 	qb.datasets(source = 'EU')
 
-	### Obtain series data
-	qb.series(dataset = 'FRED')
-
 	### Return the response of any API url in Pandas if it contains time series data and JSON format otherwise
-	qb.from_url('https://www.inquirim.com/api/series/?ticker=GDPQUS')
+	qb.from_url('https://www.econdb.com/api/series/?ticker=GDPQUS')

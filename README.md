@@ -8,7 +8,7 @@ This Python module provides a wrapper around the API of Econdb.com.
 
 To send requests to the API, users need to provide an authentication token, which can be obtained by registering at econdb.com.
 
-Documentation of the API and use examples can be found on the [documentation site](https://www.econdb.com/docs/libraries#python).
+Documentation of the API and use examples can be found on the [documentation site](https://www.econdb.com/documentation/inquisitor).
 
 ### Installation
 

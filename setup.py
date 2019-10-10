@@ -24,14 +24,14 @@ Just type:
     pip install inquisitor
 
 You can also find `Inquisitor on Github
-<https://github.com/inquirim/inquisitor/>`_
+<https://github.com/econdb/inquisitor/>`_
 
 
 
 Documentation
 -------------
 
-The documentation on installation, use and API description is found at econdb.com `documentation page. <https://www.econdb.com/docs/libraries/#python/>`_
+The documentation on installation, use and API description is found at econdb.com `documentation page. <https://www.econdb.com/documenation/inquisitor/>`_
 
 Usage example
 -------------
@@ -60,8 +60,8 @@ setup(
     author='Oriol Andres',
     license='MIT License',
     author_email='admin@econdb.com',
-    url='https://github.com/inquirim/inquisitor',
-    download_url='https://github.com/inquirim/inquisitor/tarball/0.1.9',
+    url='https://github.com/econdb/inquisitor',
+    download_url='https://github.com/econdb/inquisitor/tarball/0.1.9',
     keywords=['data', 'economics', 'finance', 'api'],
     install_requires=["requests"],
     tests_require=["httmock"],
